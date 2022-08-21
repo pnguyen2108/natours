@@ -1,0 +1,68 @@
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin col-x-of-y($x, $y, $background-color, $color) {
+  width: calc(((#{$grid-width} - #{($gutter-horizontal * ($y - $x)) / $x}) / #{$y}) * #{$x});
+  background-color: $background-color;
+  color: $color;
+  padding: 1.5rem 0;
+  float: left;
+
+  &:not(:last-child) {
+    margin-right: $gutter-horizontal;
+
+    @include responsive(tablet-port) {
+      margin-right: 0;
+      margin-bottom: $gutter-vertical-small;
+    }
+  }
+
+  @include responsive(tablet-port) {
+    max-width: 50rem;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// RESPONSIVE
+// 0-600px : mobile
+// 600-900px: tablet-port
+// 900-1200px : tablet landscape
+// 1200-1800px: normal style
+// $breakpoint argument choices: phone / tablet-port / tablet-land / desktop
+@mixin responsive($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet-port {
+    @media (max-width: 56.25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet-land {
+    @media (max-width: 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == desktop {
+    @media (min-width: 112.5em) {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+@import "./typography";
+@import "../abstracts/mixins";
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+
+  @include responsive(phone) {
+    font-size: 50%;
+  }
+
+  @include responsive(tablet-port) {
+    font-size: 56.25%;
+  }
+
+  @include responsive(tablet-land) {
+    font-size: 56.25%;
+  }
+
+  @include responsive(desktop) {
+    font-size: 75%;
+  }
+}
+
+body {
+  box-sizing: border-box;
+  padding: 3rem;
+
+  @include responsive(tablet-port) {
+    padding: 0;
+  }
+
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}
+
